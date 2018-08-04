@@ -8,6 +8,8 @@ const StyleWrapper = styled.div`
 	position: absolute;
 	width: ${({ size }) => `${size}px`};
 	height: ${({ size }) => `${size}px`};
+	left: ${({ position }) => `${position.x}px`};
+	top: ${({ position }) => `${position.y}px`};
 
 	.InnerHead {
 		position: absolute;
