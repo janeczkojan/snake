@@ -1,4 +1,5 @@
 import { put, takeEvery, takeLatest, select } from 'redux-saga/effects';
+import { FIELDS_PER_LINE } from '../../config/game_board';
 
 import { 
 	Actions as WindowActions,
@@ -29,10 +30,10 @@ export function* windowResize(action) {
 		
 		size = size.width < size.height ? size.width : size.height;
 		size -= 180;
-		size -= (size % 50);
+		size -= (size % FIELDS_PER_LINE);
 
 		yield put(GameActions.setBoardSize(size));
-		yield put(GameActions.setFieldSize(size / 50));
+		yield put(GameActions.setFieldSize(size / FIELDS_PER_LINE));
 	}
 }
 

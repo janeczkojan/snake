@@ -6,6 +6,7 @@ import Actions from './Actions';
 import Game from './Game';
 import Statistics from './Statistics';
 import { Actions as WindowActions } from '../store/state/window';
+import { Actions as GameActions } from '../store/state/game';
 import { func, bool, string } from 'prop-types';
 import { RUNNING, STARTING, FINISHED, NONE } from '../config/game_status';
 
@@ -24,7 +25,8 @@ class App extends Component {
 
   static propTypes = {
     resizeWindow: func.isRequired,
-    gameStatus: string.isRequired
+    gameStatus: string.isRequired,
+    keyPress: func.isRequired
   };
 
 
@@ -32,6 +34,7 @@ class App extends Component {
     super(props);
 
     this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   componentWillMount() {
@@ -40,11 +43,14 @@ class App extends Component {
 
   componentDidMount() {
     this.props.resizeWindow();   
+
     window.addEventListener('resize', this.handleWindowResize);
+    window.addEventListener('keydown', this.handleKeyPress);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.this.handleWindowResize);
+    window.removeEventListener('keydown', this.handleKeyPress);
   }
 
   render() {
@@ -63,6 +69,11 @@ class App extends Component {
   handleWindowResize(e) {
     this.props.resizeWindow();
   }
+
+  handleKeyPress(e) {
+    const key = e.keyCode;
+    this.props.keyPress(key)
+  }
 }
 
 
@@ -71,6 +82,7 @@ export default connect(
     gameStatus: state.game.status
   }),
   (dispatch) => ({
-    resizeWindow: () => dispatch(WindowActions.resize())
+    resizeWindow: () => dispatch(WindowActions.resize()),
+    keyPress: (key) => dispatch(GameActions.keyPress(key))
   })
 )(App);

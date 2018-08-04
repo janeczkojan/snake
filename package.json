@@ -1,6 +1,7 @@
 {
   "name": "snake_1.0.0",
   "version": "0.1.0",
+  "homepage": "http://80.211.40.91/snake",
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",

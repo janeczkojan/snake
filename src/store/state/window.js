@@ -11,6 +11,8 @@ export class Types {
 	static SET_HEIGHT = 'WINDOW/SET_HEIGHT';
 	static SET_SIZE = 'WINDOW/SET_SIZE';
 
+	static CLEAR_ALL = 'WINDOW/CLEAR_ALL';
+
 	static RESIZE = 'WINDOW/RESIZE';
 }
 
@@ -35,6 +37,12 @@ export class Actions {
 		}
 	});
 
+
+	static clearAll = () => ({
+		type: Types.CLEAR_ALL
+	});
+
+
 	static resize = () => ({
 		type: Types.RESIZE
 	});
@@ -49,6 +57,8 @@ export const reducer = (state = INIT_STATE, { type, payload }) => {
 			return { ...state, height: payload };
 		case Types.SET_SIZE:
 			return { ...state, width: payload.width, height: payload.height };
+		case Types.CLEAR_ALL:
+			return INIT_STATE;
 		default:
 			return state;
 	}

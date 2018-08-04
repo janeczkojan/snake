@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func, number, bool } from 'prop-types';
+import { func, number, bool, object } from 'prop-types';
 import styled from 'styled-components';
 import GameBoard from './GameBoard';
 import { connect } from 'react-redux';
@@ -20,16 +20,22 @@ class Game extends Component {
 
 	static propTypes = {
 		boardSize: number.isRequired,
-		visible: bool.isRequired
+		fieldSize: number.isRequired,
+		visible: bool.isRequired,
+		snake: object.isRequired
 	};
 
 
 	render() {
-		const { boardSize, visible } = this.props;
+		const { boardSize, visible, snake, fieldSize } = this.props;
 
 		return (
 			<StyleWrapper className="Game" visible={visible}>
-				<GameBoard size={boardSize} />
+				<GameBoard 
+					size={boardSize} 
+					snake={snake}
+					fieldSize={fieldSize}
+				/>
 			</StyleWrapper>
 		);
 	}
@@ -39,7 +45,9 @@ class Game extends Component {
 export default connect(
   (state) => ({
 		boardSize: state.game.boardSize,
-		visible: state.game.status === RUNNING
+		fieldSize: state.game.fieldSize,
+		visible: state.game.status === RUNNING,
+		snake: state.snake
 	}),
   (dispatch) => ({
     

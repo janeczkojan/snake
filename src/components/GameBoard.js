@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { number } from 'prop-types';
+import { number, object } from 'prop-types';
 import Snake from './Snake';
 
 
@@ -24,16 +24,23 @@ StyleWrapper.propTypes = {
 class GameBoard extends Component {
 
 	static propTypes = {
-		size: number.isRequired
+		size: number.isRequired,
+		snake: object.isRequired,
+		fieldSize: number.isRequired
 	};
 
 
 	render() {
-		const { size } = this.props;
-
+		const { size, snake, fieldSize } = this.props;
+		
 		return (
 			<StyleWrapper className="GameBoard" size={size}>
-				<Snake />
+				<Snake 
+					head={snake.head}
+					body={snake.body}
+					tail={snake.tail}
+					blockSize={fieldSize}
+				/>
 			</StyleWrapper>
 		);
 	}
