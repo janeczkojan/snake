@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 
-export const HEIGHT = 54;
+export const HEIGHT = 40;
 
 
 const StyleWrapper = styled.div`
@@ -10,26 +10,21 @@ const StyleWrapper = styled.div`
 	max-height: ${HEIGHT}px;
 	min-height: ${HEIGHT}px;
 	width: 100%;
-
-	h1 {
-		text-align: center;
-		height: 38px;
-		font-size: 32px;
-		padding: 8px;
-	}
+	text-align: center;
+	margin-top: 20px;
 `;
 
 
-class Header extends Component {
+class Actions extends Component {
 
 	render() {
 		return (
-			<StyleWrapper className="Header">
-				<h1>Snake 1.0.0</h1>
+			<StyleWrapper className="Actions">
+				<button>btn</button>
 			</StyleWrapper>
 		);
 	}
 }
 
 
-export default Header;
+export default Actions;
