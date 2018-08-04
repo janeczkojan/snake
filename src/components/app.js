@@ -6,7 +6,8 @@ import Actions from './Actions';
 import Game from './Game';
 import Statistics from './Statistics';
 import { Actions as WindowActions } from '../store/state/window';
-import { func } from 'prop-types';
+import { func, bool, string } from 'prop-types';
+import { RUNNING, STARTING, FINISHED, NONE } from '../config/game_status';
 
 
 const StyleWrapper = styled.div`
@@ -22,7 +23,8 @@ const StyleWrapper = styled.div`
 class App extends Component {
 
   static propTypes = {
-    resizeWindow: func.isRequired
+    resizeWindow: func.isRequired,
+    gameStatus: string.isRequired
   };
 
 
@@ -46,6 +48,8 @@ class App extends Component {
   }
 
   render() {
+    const { gameStatus } = this.props;
+
     return (
       <StyleWrapper className="App">
         <Header />
@@ -64,7 +68,7 @@ class App extends Component {
 
 export default connect(
   (state) => ({
-
+    gameStatus: state.game.status
   }),
   (dispatch) => ({
     resizeWindow: () => dispatch(WindowActions.resize())

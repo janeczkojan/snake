@@ -10,7 +10,7 @@ import {
 } from '../state/game';
 
 
-function* windowResize(action) {
+export function* windowResize(action) {
 	let size = {
 		width: window.innerWidth,
 		height: window.innerHeight

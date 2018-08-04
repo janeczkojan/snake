@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { number } from 'prop-types';
+import Snake from './Snake';
 
 
 const StyleWrapper = styled.div`
@@ -11,8 +12,8 @@ const StyleWrapper = styled.div`
 	max-height: ${({ size }) => `${size}px`};
 	min-width: ${({ size }) => `${size}px`};
 	min-height: ${({ size }) => `${size}px`};
-	/* margin-top: 20px; */
 	border: 4px solid darkgray;
+	position: relative;
 `;
 
 StyleWrapper.propTypes = {
@@ -32,7 +33,7 @@ class GameBoard extends Component {
 
 		return (
 			<StyleWrapper className="GameBoard" size={size}>
-				
+				<Snake />
 			</StyleWrapper>
 		);
 	}

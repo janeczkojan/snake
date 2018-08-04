@@ -1,7 +1,9 @@
+import * as GAME_STATUS from '../../config/game_status';
+
+
 export const INIT_STATE = {
 
-	running: false,
-	finished: false,
+	status: GAME_STATUS.NONE,
 	boardSize: 0,
 	fieldSize: 0
 };
@@ -9,23 +11,20 @@ export const INIT_STATE = {
 
 export class Types {
 
-	static SET_RUNNING = 'GAME/SET_RUNNING';
-	static SET_FINISHED = 'GAME/SET_FINISHED';
+	static SET_STATUS = 'GAME/SET_STATUS';
 	static SET_BOARD_SIZE = 'GAME/SET_BOARD_SIZE';
 	static SET_FIELD_SIZE = 'GAME/SET_FIELD_SIZE';
+
+	static START = 'GAME/START';
+	static STOP = 'GAME/STOP';
 }
 
 
 export class Actions {
 
-	static setRunning = (running = false) => ({
-		type: Types.SET_RUNNING,
-		payload: running === true
-	});
-
-	static setFinished = (finished = false) => ({
-		type: Types.SET_FINISHED,
-		payload: finished === true
+	static setStatus = (status = GAME_STATUS.NONE) => ({
+		type: Types.SET_STATUS,
+		payload: !status ? GAME_STATUS.NONE : status
 	});
 
 	static setBoardSize = (size = 0) => ({
@@ -37,15 +36,21 @@ export class Actions {
 		type: Types.SET_FIELD_SIZE,
 		payload: parseInt(size, 10)
 	});
+
+	static start = () => ({
+		type: Types.START
+	});
+
+	static stop = () => ({
+		type: Types.STOP
+	});
 }
 
 
 export const reducer = (state = INIT_STATE, { type, payload }) => {
 	switch (type) {
-		case Types.SET_RUNNING:
-			return { ...state, running: payload };
-		case Types.SET_FINISHED:
-			return { ...state, finished: payload };
+		case Types.SET_STATUS:
+			return { ...state, status: payload };
 		case Types.SET_BOARD_SIZE:
 			return { ...state, boardSize: payload };
 		case Types.SET_FIELD_SIZE:
